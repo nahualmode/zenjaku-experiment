@@ -87,12 +87,12 @@ export default function Layout({ children }) {
                 >
                     {/* Flicker on mobile, show both on desktop */}
                     <span className="hidden md:inline">
-                        a social experiment by <span className="font-bold">BUSTOS69</span> &middot; pfps by <span className="font-bold">Vibing Studios</span>
+                        a social experiment by <span className="font-bold">0XNAHUAL</span> &middot; pfps by <span className="font-bold">Vibing Studios</span>
                     </span>
                     <span className="inline md:hidden transition-opacity duration-300"
                         style={{ opacity: fade ? 1 : 0, transition: 'opacity 350ms' }}>
                         {showFirstCredit
-                            ? <>a social experiment by <span className="font-bold">BUSTOS69</span></>
+                            ? <>a social experiment by <span className="font-bold">0XNahual</span></>
                             : <>pfps by <span className="font-bold">Vibing Studios</span></>
                         }
                     </span>
