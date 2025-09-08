@@ -30,12 +30,12 @@ const Header = () => {
         },
         {
             name: 'SOL',
-            link: 'https://www.tensor.trade/trade/vibe_knights',
+            link: 'https://www.tensor.trade/trade/zenjaku',
             isExternal: true
         },
         {
             name: 'BTC',
-            link: 'https://ordinals.com/inscription/your-inscription-id',
+            link: 'https://magiceden.io/ordinals/marketplace/zenjaku',
             isExternal: true
         }
     ]
