@@ -18,6 +18,8 @@ export default function Gallery() {
             <Head>
                 <title>1/1 Gallery | The Zenjaku Experiment</title>
                 <meta name="description" content="21 unique pieces of digital rebellion, inscribed forever on the Bitcoin blockchain." />
+                <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+                <link rel="icon" type="image/png" href="/favicon.png" />
             </Head>
 
             <div className="pt-24 px-4 pb-16">
@@ -31,7 +33,7 @@ export default function Gallery() {
                                 opacity: glitchActive ? 0.9 : 0.5
                             }}
                         >
-                            INSCRIBED ON BITCOIN BLOCK 789012
+                            INSCRIBED ON THE BITCOIN BLOCKCHAIN FOR ETERNITY
                         </div>
                         <h1 
                             className="text-3xl font-black tracking-tighter mb-4"
@@ -43,15 +45,14 @@ export default function Gallery() {
                                     : 'none'
                             }}
                         >
-                            29 DIGITAL ENLIGHTENMENTS
+                            29 ZENJAKU CHAMPPIONS
                         </h1>
-                        <div className="space-y-2">
+                        <div className="space-y-3">
                             <p 
                                 className="text-sm opacity-70"
                                 style={{ color: isDark ? '#FFFFFF' : '#000000' }}
                             >
-                                Each piece a unique enlightenment. Each inscription a digital meditation.
-                                <span className="ml-2 text-[#ff9900]">21/29 revealed.</span>
+                                Forged as one-of-ones, these champions are the rarest forms of the Zenjaku. Each one is a unique artifact, reserved for top-tier collectors who seek the ultimate expression of the experiment.
                             </p>
                             <p 
                                 className="text-[10px] font-mono tracking-wider"
@@ -62,12 +63,17 @@ export default function Gallery() {
                             >
                                 IMMUTABLE // UNCENSORABLE // ETERNAL
                             </p>
-                            <p 
-                                className="text-[10px] font-mono"
-                                style={{ color: isDark ? '#FFFFFF' : '#000000', opacity: 0.5 }}
-                            >
-                                ARTWORK INSCRIBED ON THE BITCOIN BLOCKCHAIN
-                            </p>
+                            <div className="flex gap-4 pt-2">
+                                <a 
+                                    href="https://magiceden.io/ordinals/marketplace/zenjaku"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-[10px] font-mono tracking-wider uppercase hover:opacity-70 transition-opacity border-b border-current"
+                                    style={{ color: isDark ? '#FFFFFF' : '#000000' }}
+                                >
+                                    VIEW ON MARKET →
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -242,14 +248,22 @@ export default function Gallery() {
                                         <div className="text-xs break-all tracking-wider text-[#ff6600]/70">{selectedPiece.tx}</div>
                                     </div>
                                 </div>
-                                <div className="pt-4 border-t border-white/10">
+                                <div className="pt-4 border-t border-white/10 space-y-2">
                                     <a 
                                         href={`https://ordiscan.com/inscription/${selectedPiece.inscription}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-block text-xs tracking-wider hover:text-[#ff9900] transition-colors"
+                                        className="inline-block text-xs tracking-wider hover:text-[#ff9900] transition-colors mr-4"
                                     >
                                         VIEW ON ORDISCAN →
+                                    </a>
+                                    <a 
+                                        href="https://magiceden.io/ordinals/marketplace/zenjaku"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-block text-xs tracking-wider hover:text-[#ff9900] transition-colors"
+                                    >
+                                        VIEW ON MARKET →
                                     </a>
                                 </div>
                             </div>

@@ -6,25 +6,50 @@ import { HiMenu, HiX } from 'react-icons/hi'
 const Header = () => {
     const { isDark, glitchActive, mounted } = useDarkMode()
     const [menuOpen, setMenuOpen] = useState(false)
+    const [galleryDropdownOpen, setGalleryDropdownOpen] = useState(false)
+    const [dropdownTimeout, setDropdownTimeout] = useState(null)
+
+    // Cleanup timeout on unmount
+    useEffect(() => {
+        return () => {
+            if (dropdownTimeout) {
+                clearTimeout(dropdownTimeout)
+            }
+        }
+    }, [dropdownTimeout])
 
     const links = [
         {
-            name: 'Observe',
+            name: 'How it Works',
             link: '/manifesto',
             isExternal: false
         },
         {
-            name: 'Gallery',
+            name: ' Collection',
             link: '/gallery',
-            isExternal: false
+            isExternal: false,
+            hasDropdown: true,
+            dropdownItems: [
+                {
+                    name: 'The Zenjaku',
+                    link: '#', // Placeholder for now
+                    comingSoon: true
+                },
+                {
+                    name: 'Zenjaku Legends (BTC)',
+                    link: '/gallery'
+                }
+            ]
         },
+    
+        
         {
-            name: 'Cemetery',
+            name: 'The Fallen',
             link: '/cemetery',
             isExternal: false
         },
         {
-            name: 'TREASURY',
+            name: 'The Treasury',
             link: '/treasury',
             isExternal: false
         },
@@ -58,7 +83,7 @@ const Header = () => {
                     className={`text-xs tracking-[0.3em] uppercase transform transition-transform duration-300 ${glitchActive ? 'translate-x-[2px]' : ''}`}
                     style={{ color: isDark ? '#FFFFFF' : '#000000' }}
                 >
-                    禅衡者实验 | A RITUAL OF BALANCE
+                    禅衡者实验 | A GAME OF BALANCE
                 </div>
             </Link>
 
@@ -77,8 +102,69 @@ const Header = () => {
             <nav className="hidden md:block">
                 <ul className="flex items-center space-x-8">
                     {links.map((link) => (
-                        <li key={link.name}>
-                            {link.isExternal ? (
+                        <li key={link.name} className="relative">
+                            {link.hasDropdown ? (
+                                <div
+                                    className="relative"
+                                    onMouseEnter={() => {
+                                        if (dropdownTimeout) {
+                                            clearTimeout(dropdownTimeout)
+                                            setDropdownTimeout(null)
+                                        }
+                                        setGalleryDropdownOpen(true)
+                                    }}
+                                    onMouseLeave={() => {
+                                        const timeout = setTimeout(() => {
+                                            setGalleryDropdownOpen(false)
+                                        }, 150)
+                                        setDropdownTimeout(timeout)
+                                    }}
+                                >
+                                    <button
+                                        className={`font-mono text-xs tracking-widest uppercase hover:opacity-70 transition-opacity ${isDark ? 'text-white' : 'text-black'}`}
+                                        onClick={() => setGalleryDropdownOpen(!galleryDropdownOpen)}
+                                    >
+                                        {link.name}
+                                    </button>
+                                    {galleryDropdownOpen && (
+                                        <div 
+                                            className={`absolute top-full left-0 mt-2 py-2 min-w-[200px] rounded shadow-lg z-50 ${isDark ? 'bg-black border border-gray-700' : 'bg-white border border-gray-200'}`}
+                                            onMouseEnter={() => {
+                                                if (dropdownTimeout) {
+                                                    clearTimeout(dropdownTimeout)
+                                                    setDropdownTimeout(null)
+                                                }
+                                            }}
+                                            onMouseLeave={() => {
+                                                const timeout = setTimeout(() => {
+                                                    setGalleryDropdownOpen(false)
+                                                }, 150)
+                                                setDropdownTimeout(timeout)
+                                            }}
+                                        >
+                                            {link.dropdownItems.map((item) => (
+                                                item.comingSoon ? (
+                                                    <div
+                                                        key={item.name}
+                                                        className={`block px-4 py-2 font-mono text-xs tracking-wide uppercase cursor-not-allowed opacity-50 ${isDark ? 'text-white' : 'text-black'}`}
+                                                    >
+                                                        {item.name} <span className="text-[10px] opacity-60">(Coming Soon)</span>
+                                                    </div>
+                                                ) : (
+                                                    <Link
+                                                        key={item.name}
+                                                        href={item.link}
+                                                        className={`block px-4 py-2 font-mono text-xs tracking-wide uppercase hover:opacity-70 transition-opacity ${isDark ? 'text-white hover:bg-gray-900' : 'text-black hover:bg-gray-100'}`}
+                                                        onClick={() => setGalleryDropdownOpen(false)}
+                                                    >
+                                                        {item.name}
+                                                    </Link>
+                                                )
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            ) : link.isExternal ? (
                                 <a
                                     href={link.link}
                                     target="_blank"
@@ -113,7 +199,34 @@ const Header = () => {
                     <ul className="flex flex-col gap-8 text-2xl font-mono uppercase">
                         {links.map((link) => (
                             <li key={link.name}>
-                                {link.isExternal ? (
+                                {link.hasDropdown ? (
+                                    <div className="flex flex-col gap-4">
+                                        <span className={`font-mono text-2xl tracking-widest uppercase border-b border-[#222] pb-2 ${isDark ? 'text-white' : 'text-black'}`}>
+                                            {link.name}
+                                        </span>
+                                        <div className="flex flex-col gap-2 ml-4">
+                                            {link.dropdownItems.map((item) => (
+                                                item.comingSoon ? (
+                                                    <div
+                                                        key={item.name}
+                                                        className={`font-mono text-lg tracking-wide uppercase cursor-not-allowed opacity-50 ${isDark ? 'text-white' : 'text-black'}`}
+                                                    >
+                                                        {item.name} <span className="text-sm opacity-60">(Coming Soon)</span>
+                                                    </div>
+                                                ) : (
+                                                    <Link
+                                                        key={item.name}
+                                                        href={item.link}
+                                                        className={`font-mono text-lg tracking-wide uppercase hover:text-[#ff9900] transition-colors ${isDark ? 'text-white' : 'text-black'}`}
+                                                        onClick={() => setMenuOpen(false)}
+                                                    >
+                                                        {item.name}
+                                                    </Link>
+                                                )
+                                            ))}
+                                        </div>
+                                    </div>
+                                ) : link.isExternal ? (
                                     <a
                                         href={link.link}
                                         target="_blank"

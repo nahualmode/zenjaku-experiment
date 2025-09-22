@@ -32,79 +32,136 @@ export default function Treasury() {
       <Head>
         <title>Treasury | The Zenjaku Experiment</title>
         <meta name="description" content="Transparent record of donations and treasury for Zenjaku. Half of all royalties are used to help others, restoring balance to the world." />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
-      <div className={`pt-24 px-2 pb-16 min-h-screen ${bg}`}>
-        <div className="max-w-5xl mx-auto w-full">
-          {/* Slick Title */}
-          <div className="mb-8 font-mono">
+      <div className={`pt-24 px-4 pb-16 min-h-screen ${isDark ? 'bg-black' : 'bg-white'}`}>
+        <div className="max-w-7xl mx-auto">
+          {/* Treasury Header - Matching site aesthetic */}
+          <div className="mb-16 font-mono">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-start">
+              {/* Left Column - Title and Description */}
+              <div className="lg:order-1">
+                <div 
+                  className="text-[10px] tracking-[0.5em] uppercase mb-3 glitch-text"
+                  style={{ 
+                    color: isDark ? '#FFFFFF' : '#000000',
+                    opacity: glitchActive ? 0.9 : 0.5
+                  }}
+                >
+                  REAL WORLD IMPACT
+                </div>
+                <h1 
+                  className="text-2xl sm:text-3xl font-black tracking-tighter mb-4"
+                  style={{ 
+                    color: isDark ? '#FFFFFF' : '#000000',
+                    WebkitTextStroke: isDark ? '1px #FFF' : '1px #000',
+                    textShadow: glitchActive ? 
+                      (isDark ? '-2px -2px #ff6600, 2px 2px #ff9900' : '2px 2px #ff6600, -2px -2px #ff9900')
+                      : 'none'
+                  }}
+                >
+                  THE TREASURY
+                </h1>
+                <p 
+                  className="text-sm opacity-70 leading-relaxed"
+                  style={{ color: isDark ? '#FFFFFF' : '#000000' }}
+                >
+                  Half of all royalties are offered to the world — supporting causes, lifting others, and restoring balance beyond the chain. Every donation becomes part of the story, recorded and shared on <a href="https://x.com/vibeknights" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80 transition-opacity" style={{ color: isDark ? '#ff6600' : '#ff9900' }}>X</a>.
+                </p>
+              </div>
+
+              {/* Right Column - Stats */}
+              <div className="lg:order-2 lg:flex lg:justify-end lg:items-start">
+                <div className="text-center lg:text-right space-y-3 lg:mt-8">
+                  <div className="font-mono text-xl sm:text-2xl font-black tracking-tight" style={{ color: isDark ? '#ff9900' : '#ff6600' }}>
+                    ${TOTAL_DONATED.toLocaleString()} DONATED
+                  </div>
+                  <div className="font-mono text-sm opacity-70" style={{ color: isDark ? '#ff9900' : '#ff6600' }}>
+                    ${TREASURY_BALANCE.toLocaleString()} treasury balance
+                  </div>
+                  <div 
+                    className="text-[10px] font-mono tracking-wider"
+                    style={{ 
+                      color: isDark ? '#ff9900' : '#ff6600',
+                      opacity: glitchActive ? 0.9 : 0.7
+                    }}
+                  >
+                    BALANCE // RESTORED // ETERNAL
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Latest Donation Story */}
+          <div className="relative">
+            {/* Cyberpunk Frame */}
+            <div className={`absolute inset-0 border ${isDark ? 'border-[#ff9900]/20' : 'border-[#ff6600]/30'}`} />
+            <div className={`absolute top-0 left-0 w-6 h-6 border-t border-l ${isDark ? 'border-[#ff9900]/40' : 'border-[#ff6600]/50'}`} />
+            <div className={`absolute top-0 right-0 w-6 h-6 border-t border-r ${isDark ? 'border-[#ff9900]/40' : 'border-[#ff6600]/50'}`} />
+            <div className={`absolute bottom-0 left-0 w-6 h-6 border-b border-l ${isDark ? 'border-[#ff9900]/40' : 'border-[#ff6600]/50'}`} />
+            <div className={`absolute bottom-0 right-0 w-6 h-6 border-b border-r ${isDark ? 'border-[#ff9900]/40' : 'border-[#ff6600]/50'}`} />
+            
+            {/* Content */}
+            <div className="p-6 sm:p-8">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+                {/* Avatar and Info */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#ff9900] to-[#ff6600] flex items-center justify-center border border-[#ff9900]/40">
+                    <span className="font-mono text-sm font-bold text-white">TC</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-mono text-sm font-bold" style={{ color: isDark ? '#FFFFFF' : '#000000' }}>
+                      {LATEST_STORY.author}
+                    </span>
+                    <span className="font-mono text-[10px] tracking-wider opacity-70" style={{ color: isDark ? '#ff9900' : '#ff6600' }}>
+                      {LATEST_STORY.handle}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Story Text */}
+                <div className="flex-1 min-w-0">
+                  <p className="font-mono text-sm opacity-80 leading-relaxed" style={{ color: isDark ? '#FFFFFF' : '#000000' }}>
+                    {LATEST_STORY.text}
+                  </p>
+                  <div className="flex items-center gap-3 mt-2">
+                    <span className="font-mono text-[10px] tracking-wider opacity-60" style={{ color: isDark ? '#FFFFFF' : '#000000' }}>
+                      {LATEST_STORY.date}
+                    </span>
+                    <a 
+                      href={LATEST_STORY.tweetUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="inline-block text-[10px] tracking-wider hover:opacity-80 transition-opacity font-mono border border-current px-3 py-1"
+                      style={{ color: isDark ? '#ff9900' : '#ff6600' }}
+                    >
+                      VIEW ON TWITTER →
+                    </a>
+                  </div>
+                </div>
+
+                {/* Donation Amount */}
+                <div className="flex flex-col items-end">
+                  <div className={`font-mono text-lg font-black tracking-tight ${isDark ? 'text-[#ff9900]' : 'text-[#ff6600]'}`}>
+                    +${LATEST_STORY.amount.toLocaleString()}
+                  </div>
+                  <div className="font-mono text-[10px] tracking-wider opacity-70" style={{ color: isDark ? '#FFFFFF' : '#000000' }}>
+                    DONATED
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Glitch Lines */}
             <div 
-              className="text-[10px] tracking-[0.5em] uppercase mb-2 glitch-text"
-              style={{ color: isDark ? '#FFFFFF' : '#000000', opacity: glitchActive ? 0.9 : 0.5 }}
-            >
-              zenjaku treasury
-            </div>
-            <h1 
-              className="text-3xl font-black tracking-tighter mb-2"
-              style={{ color: isDark ? '#FFFFFF' : '#000000', WebkitTextStroke: isDark ? '1px #FFF' : '1px #000', textShadow: glitchActive ? (isDark ? '-2px -2px #ff3300, 2px 2px #ff9900' : '2px 2px #ff3300, -2px -2px #ff9900') : 'none' }}
-            >
-              BALANCE THROUGH GIVING
-            </h1>
-            <div className="space-y-2">
-              <p 
-                className="font-mono text-sm opacity-70"
-                style={{ color: isDark ? '#FFFFFF' : '#000000' }}
-              >
-                Half of all royalties are used to help others, restoring balance to the world.
-              </p>
-              <p 
-                className="font-mono text-sm opacity-70"
-                style={{ color: isDark ? '#FFFFFF' : '#000000' }}
-              >
-                Every donation helps restore balance. Stories are shared on <a href="https://twitter.com/zenjakuNFT" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: accentSecondary }}>Twitter</a>.
-              </p>
-            </div>
-          </div>
-
-          {/* Hero Stats Bar */}
-          <div className="w-full flex flex-col sm:flex-row items-stretch justify-between mb-8 border-b" style={{ borderColor: accent, background: isDark ? '#181818' : '#f7f7f7' }}>
-            <div className="flex-1 flex flex-col items-center justify-center py-8 px-2 sm:px-8 relative">
-              <span className="font-mono text-xs text-gray-400 mb-1 tracking-widest">Total donated</span>
-              <span className={`font-mono text-4xl font-black ${statText} tracking-tight`} style={{ letterSpacing: '-2px' }}>
-                ${TOTAL_DONATED.toLocaleString()}
-              </span>
-              <span className="absolute left-1/2 -bottom-1 w-12 h-0.5" style={{ background: accent, opacity: 0.7, transform: 'translateX(-50%)' }} />
-            </div>
-            <div className="hidden sm:block w-px" style={{ background: accent, opacity: 0.15 }} />
-            <div className="flex-1 flex flex-col items-center justify-center py-8 px-2 sm:px-8 relative">
-              <span className="font-mono text-xs text-gray-400 mb-1 tracking-widest">Treasury balance</span>
-              <span className={`font-mono text-4xl font-black ${statText2} tracking-tight`} style={{ letterSpacing: '-2px' }}>
-                ${TREASURY_BALANCE.toLocaleString()}
-              </span>
-              <span className="absolute left-1/2 -bottom-1 w-12 h-0.5" style={{ background: accentSecondary, opacity: 0.7, transform: 'translateX(-50%)' }} />
-            </div>
-          </div>
-
-          {/* Latest Story Banner - Gallery Subtitle Style */}
-          <div className="w-full flex items-center gap-4 py-6 px-2 sm:px-8 border-b" style={{ borderColor: accent, background: isDark ? '#181818' : '#f7f7f7', minHeight: 90 }}>
-            {/* Small avatar and username */}
-            <div className="flex flex-col items-center justify-center min-w-[48px]">
-              <div className="w-8 h-8 rounded-full bg-[#ff9900] flex items-center justify-center border border-[#ff9900]/40 mb-1">
-                 <span className="font-mono text-xs text-white">pfp</span>
-              </div>
-              <span className="font-mono text-[10px] text-gray-400 truncate max-w-[60px]">{LATEST_STORY.handle}</span>
-            </div>
-            {/* Main tweet text, styled like gallery subtitle */}
-            <div className="flex-1 flex flex-col justify-center min-w-0">
-              <span className="font-mono text-sm opacity-70" style={{ color: isDark ? '#FFFFFF' : '#000000' }}>{LATEST_STORY.text}</span>
-              <div className="flex items-center gap-2 mt-1">
-                <span className="text-gray-500 text-xs whitespace-nowrap">{LATEST_STORY.date}</span>
-                <a href={LATEST_STORY.tweetUrl} target="_blank" rel="noopener noreferrer" className="inline-block text-xs tracking-wider hover:text-[#ff9900] transition-colors border border-[#ff9900]/40 rounded px-3 py-1 font-mono bg-transparent whitespace-nowrap">View on Twitter</a>
-              </div>
-            </div>
-            {/* Amount donated, bold at right */}
-            <div className="flex flex-col items-end min-w-[110px]">
-              <span className="ml-2 bg-[#ff9900] text-white text-sm sm:text-base font-mono font-bold rounded-full px-4 py-1 whitespace-nowrap">+${LATEST_STORY.amount.toLocaleString()} DONATED</span>
-            </div>
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: `repeating-linear-gradient(transparent, transparent 2px, rgba(255, 153, 0, 0.03) 3px, transparent 3px)`,
+                backgroundSize: '100% 4px'
+              }}
+            />
           </div>
         </div>
       </div>
