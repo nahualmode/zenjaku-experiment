@@ -11,7 +11,7 @@ export default function Manifesto() {
             title: "WELCOME TO THE EXPERIMENT",
             content: (
                 <>
-                    <span style={{textDecoration: 'line-through', opacity: 0.6}}>4,348</span> 4,347 elves trapped inside the chain.{"\n"}
+                    <span style={{textDecoration: 'line-through', opacity: 0.6}}>3,100</span> 3,089 elves trapped inside the chain.{"\n"}
                     Every trade shifts the outcome.{"\n"}
                     Half the royalties <a href="/cemetery" className="underline hover:opacity-80 transition-opacity" style={{color: isDark ? '#ff6600' : '#ff9900'}}>burn them from the blockchain</a>, half fuel <a href="/treasury" className="underline hover:opacity-80 transition-opacity" style={{color: isDark ? '#ff6600' : '#ff9900'}}>real-world impact</a>.{"\n"}
                     Your choices and actions balance the scales.
