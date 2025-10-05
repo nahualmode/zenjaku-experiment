@@ -3,16 +3,16 @@ import Head from 'next/head'
 import { useDarkMode } from '../contexts/DarkModeContext'
 
 // Treasury stats and latest story (easy to update)
-const TOTAL_DONATED = 4200 // USD
-const TREASURY_BALANCE = 6900 // USD
+const TOTAL_DONATED = 0 // USD
+const TREASURY_BALANCE = 0 // USD
 const LATEST_STORY = {
-  author: 'This Is The Coin',
-  handle: '@thisisthecoin',
-  avatar: '/treasury/avatar.png',
-  text: 'We just received a donation from Zenjaku! Thank you for helping us restore balance. #crypto #charity',
-  date: 'Sep 4, 2021',
-  tweetUrl: 'https://twitter.com/thisisthecoin/status/1434531234567890',
-  amount: 4200
+  author: '',
+  handle: '',
+  avatar: '',
+  text: '',
+  date: '',
+  tweetUrl: '',
+  amount: 0
 }
 
 export default function Treasury() {

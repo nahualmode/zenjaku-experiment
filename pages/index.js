@@ -58,7 +58,7 @@ export default function Home() {
                                     marginBottom: '0.5rem',
                                 }}
                             >
-                                <span className="block">4,347</span>
+                                <span className="block">3,089</span>
                                 <span className="block mt-0">TRAPPED</span>
                                 <span className="block mt-0">SOULS</span>
                             </h1>
@@ -82,14 +82,14 @@ export default function Home() {
                             className="font-mono text-xs sm:text-sm font-medium max-w-full md:max-w-[480px] text-left"
                             style={{ color: isDark ? '#FFFFFF' : '#444444' }}
                         >
-                            A collection of <span style={{textDecoration: 'line-through', opacity: 0.6}}>4,348</span> 4,347 elves trapped in an eternal struggle.
+                            A collection of <span style={{textDecoration: 'line-through', opacity: 0.6}}>3,100</span> 3,089 elves trapped in an eternal struggle.
                             As half of the royalties turn them into ash, the other saves the world.
                             Witness the balance unfold as part of our community.
                         </p>
                         <div className="flex flex-row gap-8 font-mono text-sm tracking-widest uppercase pt-2 whitespace-nowrap text-left"
                             style={{ color: isDark ? '#FFFFFF' : '#000000' }}>
                             <div className="underline underline-offset-2 decoration-1 hover:opacity-70 transition-opacity cursor-pointer">
-                                4,347 PFPS ON SOL
+                                3,089 PFPS ON SOL
                             </div>
                             <div className="underline underline-offset-2 decoration-1 hover:opacity-70 transition-opacity cursor-pointer">
                                 50 1/1S ON BTC
